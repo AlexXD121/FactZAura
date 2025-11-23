@@ -1,0 +1,67 @@
+-- CreateEnum
+CREATE TYPE "Severity" AS ENUM ('CRITICAL', 'WARNING');
+
+-- CreateEnum
+CREATE TYPE "MutationType" AS ENUM ('EMOTIONAL', 'FACTUAL', 'FABRICATION');
+
+-- CreateTable
+CREATE TABLE "Incident" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "severity" "Severity" NOT NULL,
+    "location" TEXT NOT NULL,
+    "status" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Incident_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Post" (
+    "id" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "author" TEXT NOT NULL,
+    "timestamp" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "incidentId" TEXT NOT NULL,
+    "parentId" TEXT,
+    "mutationScore" DOUBLE PRECISION,
+    "mutationType" "MutationType",
+    "credibleVotes" INTEGER NOT NULL DEFAULT 0,
+    "totalVotes" INTEGER NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Post_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Comment" (
+    "id" TEXT NOT NULL,
+    "postId" TEXT NOT NULL,
+    "author" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Comment_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "DemoState" (
+    "id" TEXT NOT NULL,
+    "speed" DOUBLE PRECISION NOT NULL DEFAULT 1.0,
+    "isPaused" BOOLEAN NOT NULL DEFAULT false,
+    "currentPosition" INTEGER NOT NULL DEFAULT 0,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "DemoState_pkey" PRIMARY KEY ("id")
+);
+
+-- AddForeignKey
+ALTER TABLE "Post" ADD CONSTRAINT "Post_incidentId_fkey" FOREIGN KEY ("incidentId") REFERENCES "Incident"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Post" ADD CONSTRAINT "Post_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "Post"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Comment" ADD CONSTRAINT "Comment_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

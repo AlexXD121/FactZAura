@@ -1,0 +1,105 @@
+{
+  "incidents": [
+    {
+      "id": "inc_mumbai_001",
+      "title": "Mumbai Urban Flood 2025",
+      "severity": "CRITICAL",
+      "location": "Mumbai, Maharashtra",
+      "status": "ACTIVE",
+      "stats": {
+        "infected_nodes": 142,
+        "mutation_rate": 0.78
+      }
+    },
+    {
+      "id": "inc_delhi_002",
+      "title": "Delhi Smog Crisis",
+      "severity": "WARNING",
+      "location": "New Delhi",
+      "status": "ACTIVE",
+      "stats": {
+        "infected_nodes": 45,
+        "mutation_rate": 0.32
+      }
+    }
+  ],
+  "posts": [
+    {
+      "id": "post_001",
+      "content": "Heavy rains reported in Dadar area. Waterlogging starting to affect traffic. Please drive carefully. #MumbaiRains",
+      "author": "CitizenReporter",
+      "timestamp": "2025-07-15T09:00:00Z",
+      "incident_id": "inc_mumbai_001",
+      "parent_id": null,
+      "mutation_score": 0.0,
+      "mutation_type": null,
+      "truth_status": "TRUE"
+    },
+    {
+      "id": "post_002",
+      "content": "RT @CitizenReporter: Heavy rains in Dadar. Waterlogging affecting traffic. Avoid the area if possible. #MumbaiRains",
+      "author": "MumbaiTrafficUpdate",
+      "timestamp": "2025-07-15T09:05:00Z",
+      "incident_id": "inc_mumbai_001",
+      "parent_id": "post_001",
+      "mutation_score": 8.5,
+      "mutation_type": "FACTUAL",
+      "truth_status": "TRUE"
+    },
+    {
+      "id": "post_003",
+      "content": "Dadar is completely underwater! Cars are floating away! It's a disaster zone! #MumbaiFlood",
+      "author": "PanicMonger",
+      "timestamp": "2025-07-15T09:15:00Z",
+      "incident_id": "inc_mumbai_001",
+      "parent_id": "post_001",
+      "mutation_score": 45.2,
+      "mutation_type": "EMOTIONAL",
+      "truth_status": "EXAGGERATED"
+    },
+    {
+      "id": "post_004",
+      "content": "BREAKING: Dam broken near Dadar! 10ft waves crashing into buildings! Govt hiding the truth! RUN! #MumbaiDoomed",
+      "author": "ConspiracyKing",
+      "timestamp": "2025-07-15T09:30:00Z",
+      "incident_id": "inc_mumbai_001",
+      "parent_id": "post_003",
+      "mutation_score": 62.1,
+      "mutation_type": "FABRICATION",
+      "truth_status": "FALSE"
+    },
+    {
+      "id": "post_005",
+      "content": "Just passed Dadar. It's raining hard but no dam burst. Stop spreading fake news! #MumbaiRains",
+      "author": "FactChecker_Ind",
+      "timestamp": "2025-07-15T09:35:00Z",
+      "incident_id": "inc_mumbai_001",
+      "parent_id": "post_004",
+      "mutation_score": 88.0,
+      "mutation_type": "FACTUAL",
+      "truth_status": "TRUE"
+    },
+    {
+      "id": "post_006",
+      "content": "My uncle works at the municipality, he says they are opening the floodgates! South Mumbai will sink in 1 hour! Forward this!",
+      "author": "WhatsAppUncle",
+      "timestamp": "2025-07-15T09:45:00Z",
+      "incident_id": "inc_mumbai_001",
+      "parent_id": "post_004",
+      "mutation_score": 55.4,
+      "mutation_type": "FABRICATION",
+      "truth_status": "FALSE"
+    },
+    {
+      "id": "post_007",
+      "content": "Water levels receding in Dadar. BMC pumps are working. Situation under control.",
+      "author": "BMC_Official",
+      "timestamp": "2025-07-15T10:00:00Z",
+      "incident_id": "inc_mumbai_001",
+      "parent_id": null,
+      "mutation_score": 0.0,
+      "mutation_type": null,
+      "truth_status": "TRUE"
+    }
+  ]
+}

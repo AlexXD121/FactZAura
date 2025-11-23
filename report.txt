@@ -1,0 +1,99 @@
+That is a crucial addition! 🧠✨ Explicitly labeling it as a "Simulation" turns a potential weakness (fake data) into a feature (controlled stress testing). It tells the judges, "We are testing the *system logic*, not just reading random tweets."
+
+Here is the **Updated Project Description** with the **Simulation Note** added prominently. You can paste this into your `requirements.md`.
+
+***
+
+# Project Specification: FactSaura
+**Tagline:** The Collaborative Intelligence Ecosystem for Crisis Truth.
+
+## 🚨 Demo Presentation Note (Crucial)
+**Context for Judges:**
+> "This demonstration is running in **'Simulation Mode'**.
+>
+> Because real crisis misinformation is unpredictable and dangerous to amplify live, we have pre-seeded the database with a **controlled 'Mumbai Flood 2025' Scenario**. This allows us to demonstrate the system's full capability—detecting Patient Zero, mapping mutation trees, and triggering agent alerts—within the short demo timeframe without relying on unstable live APIs."
+
+---
+
+## 1. Executive Summary
+FactSaura is a **misinformation immunity platform** designed for crisis scenarios (e.g., floods, riots). Unlike traditional fact-checkers that simply label claims as "True/False," FactSaura treats misinformation like a **biological virus**.
+
+It uses **Phylogenetic Algorithms** to:
+1.  Trace the "Patient Zero" (original source) of a rumor.
+2.  Map how the narrative "mutates" as it spreads across social media (e.g., from a neutral report to a panic-inducing lie).
+3.  Visualize this evolution using an interactive **Evolutionary Tree**.
+
+The system acts as a "Reddit for Truth," allowing a community to submit suspicious content, which is then analyzed by **AI Agents** and organized into "Viral Strains."
+
+## 2. Technical Architecture (The "Scientific" Stack)
+This project utilizes a **Hybrid Architecture** optimized for reliability during a live hackathon demo. It combines a high-performance local Python backend with Cloud AI.
+
+### Frontend (The "Glass Laboratory")
+* **Framework:** React 19 + Vite.
+* **Styling:** Tailwind CSS + Framer Motion (for "Glassmorphism" transparency and smooth "Aura" scanning animations).
+* **Visualization:** **React Flow** (Critical: Used to render the interactive node-link diagram of the misinformation tree).
+* **Components:** Shadcn/UI + Lucide React icons.
+* **State Management:** TanStack Query (React Query).
+
+### Backend (The "Brain")
+* **Language:** Python 3.10+.
+* **Framework:** **FastAPI** (Async, auto-generates Swagger docs).
+* **Database:** **PostgreSQL** (Local instance).
+* **ORM:** **Prisma Client Python** (For type-safe database interaction and schema management).
+* **Core Logic (Local):** `python-Levenshtein` library to calculate "Mutation Scores" (text similarity) between parent and child posts in real-time.
+* **AI Layer (Cloud):** Integration with **Gemini API** (or OpenAI) to generate natural language summaries ("Fact Check Reports") and sentiment analysis.
+
+## 3. Database Schema (Prisma)
+The data model must support a graph-like structure for tweets/posts.
+
+* **Incident:** Represents a major crisis event (e.g., "Mumbai Flood 2025").
+    * *Fields:* `id`, `title`, `severity` (Critical/Warning), `location`, `status`.
+* **Post:** Represents a single social media node (Tweet, WhatsApp message).
+    * *Fields:* `id`, `content`, `author`, `timestamp`, `incidentId`.
+    * *Self-Relation:* `parentId` (links to the post it "mutated" from).
+    * *Metrics:* `mutationScore` (Float 0-100), `mutationType` (Enum: Emotional, Factual, Fabrication).
+
+## 4. Core Functionalities & User Journey
+
+### A. The "Crisis Monitor" Feed (Home View)
+* **Concept:** A dashboard of active misinformation threats.
+* **UI:** Scrollable feed of Glassmorphism cards.
+* **Visuals:**
+    * **Heatmap Borders:** Cards have glowing borders indicating viral velocity (Red = Critical/Fast Spread, Green = Contained).
+    * **Live Stats:** "Infected Nodes: 1,240", "Mutation Rate: High."
+* **Data Source:** Fetches "Incidents" from the local PostgreSQL database.
+
+### B. The "Phylogenetic Anatomy" Lab (Detail View)
+* **Concept:** The core "Wow" factor. Visualizing the rumor's evolution.
+* **Interaction:** User clicks a card in the feed -> enters the "Lab."
+* **Visualization:**
+    * **React Flow Graph:** A tree growing left-to-right.
+    * **Root Node:** "Patient Zero" (Original accurate news).
+    * **Branches:** Child nodes show variations of the text.
+    * **Edge Coloring:** The lines connecting nodes are colored based on the **Levenshtein Mutation Score** calculated by the Python backend.
+        * 🟢 Green Line: < 10% change (Retweets).
+        * 🟡 Yellow Line: 10-40% change (Spin/Exaggeration).
+        * 🔴 Red Line: > 40% change (Fabrication/Panic).
+* **Diff View:** Clicking a node opens a side panel comparing its text to the parent, highlighting exactly which words were changed.
+
+### C. The "Agentic Submission" Portal
+* **Concept:** Users act as field agents submitting samples.
+* **Flow:**
+    1.  User pastes a WhatsApp forward text.
+    2.  **Animation:** UI shows "Agent Scanning..." with matrix-style text effects.
+    3.  **Backend Process:**
+        * Python compares input text against the DB using Fuzzy Matching.
+        * IF match found (>80% similarity): Connects it to the existing Tree.
+        * IF new: Calls Gemini API to analyze risk level.
+    4.  **Result:** Returns a "Truth Scorecard" (e.g., "⚠️ 98% Match to known 'Vihar Lake' Hoax").
+
+## 5. Demo Strategy ("The Simulation")
+* **Seed Data:** A Python script (`seed.py`) will pre-populate the database with a complex "Mumbai Flood" scenario (10-15 linked posts with varying mutation degrees) to ensure the Tree visualization looks impressive immediately.
+* **Reliability:** The demo defaults to using this pre-seeded data. The "Live AI" features are additive but not critical for the app to function if internet connectivity is poor.
+
+***
+
+### 🚀 Quick Check
+This note basically tells the judges: *"We are professionals. We prepared a scenario so you don't have to watch us struggle with Twitter's API."*
+
+Are you ready to hand this off to your IDE and start the build? 🦖

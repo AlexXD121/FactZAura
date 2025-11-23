@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-py"
+  interface = "asyncio"
+  recursive_type_depth = 5
+  output   = "../venv/Lib/site-packages/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Incident {
+  id        String   @id @default(uuid())
+  title     String
+  severity  Severity
+  location  String
+  status    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+}
+
+enum Severity {
+  CRITICAL
+  WARNING
+}
+
+model Post {
+  id            String        @id @default(uuid())
+  content       String
+  author        String
+  timestamp     DateTime      @default(now())
+  incidentId    String
+  incident      Incident      @relation(fields: [incidentId], references: [id])
+  parentId      String?
+  parent        Post?         @relation("PostHierarchy", fields: [parentId], references: [id])
+  children      Post[]        @relation("PostHierarchy")
+  mutationScore Float?
+  mutationType  MutationType?
+  credibleVotes Int           @default(0)
+  totalVotes    Int           @default(0)
+  comments      Comment[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+enum MutationType {
+  EMOTIONAL
+  FACTUAL
+  FABRICATION
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id])
+  author    String
+  content   String
+  createdAt DateTime @default(now())
+}
+
+model DemoState {
+  id              String   @id @default(uuid())
+  speed           Float    @default(1.0)
+  isPaused        Boolean  @default(false)
+  currentPosition Int      @default(0)
+  updatedAt       DateTime @updatedAt
+}
