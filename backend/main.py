@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import incident_routes, agent_routes, post_routes, websocket_routes
+from routes import incident_routes, agent_routes, post_routes, websocket_routes, analysis
 from services.agent_manager import agent_manager
 
 app = FastAPI(title="FactsAura API")
@@ -20,6 +20,7 @@ app.include_router(incident_routes.router)
 app.include_router(agent_routes.router)
 app.include_router(post_routes.router)
 app.include_router(websocket_routes.router)
+app.include_router(analysis.router)
 
 @app.on_event("startup")
 async def startup_event():

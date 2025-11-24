@@ -51,11 +51,11 @@ FactSaura is a misinformation immunity platform designed for crisis scenarios su
 
 #### Acceptance Criteria
 
-1. WHEN a User submits text content, THE System SHALL compare the submitted text against all existing Posts in the database using fuzzy matching
-2. WHEN the submitted text matches an existing Post with similarity greater than eighty percent, THE System SHALL link the submitted content to the existing phylogenetic tree
-3. WHEN the submitted text does not match any existing Post, THE System SHALL invoke the AI service to analyze the risk level
-4. WHEN analysis completes, THE System SHALL return a Truth Scorecard showing the match percentage and related known misinformation
-5. WHEN processing a submission, THE System SHALL display a scanning animation to the User
+- [x] 1. WHEN a User submits text content, THE System SHALL compare the submitted text against all existing Posts in the database using fuzzy matching
+- [x] 2. WHEN the submitted text matches an existing Post with similarity greater than eighty percent, THE System SHALL link the submitted content to the existing phylogenetic tree
+- [x] 3. WHEN the submitted text does not match any existing Post, THE System SHALL invoke the AI service to analyze the risk level
+- [x] 4. WHEN analysis completes, THE System SHALL return a Truth Scorecard showing the match percentage and related known misinformation
+- [x] 5. WHEN processing a submission, THE System SHALL display a scanning animation to the User
 
 ### Requirement 4
 
@@ -75,8 +75,8 @@ FactSaura is a misinformation immunity platform designed for crisis scenarios su
 
 #### Acceptance Criteria
 
-1. WHEN comparing two Post contents, THE System SHALL calculate the Levenshtein distance between the text strings
-2. WHEN the Levenshtein distance is calculated, THE System SHALL convert the distance to a Mutation Score percentage
+- [x] 1. WHEN comparing two Post contents, THE System SHALL calculate the Levenshtein distance between the text strings
+- [x] 2. WHEN the Levenshtein distance is calculated, THE System SHALL convert the distance to a Mutation Score percentage
 3. WHEN a Post is linked to a parent Post, THE System SHALL compute and store the Mutation Score immediately
 4. WHEN the Mutation Score is less than ten percent, THE System SHALL classify the relationship as a retweet
 5. WHEN the Mutation Score is between ten percent and forty percent, THE System SHALL classify the relationship as spin or exaggeration
@@ -195,8 +195,8 @@ FactSaura is a misinformation immunity platform designed for crisis scenarios su
 
 #### Acceptance Criteria
 
-1. WHEN the Verifier Agent analyzes a Post, THE System SHALL use GenAI to cross-reference claims against a knowledge base or internal consistency logic
-2. WHEN misinformation is detected, THE System SHALL generate a "Truth Scorecard" automatically
+- [x] 1. WHEN the Verifier Agent analyzes a Post, THE System SHALL use GenAI to cross-reference claims against a knowledge base or internal consistency logic
+- [x] 2. WHEN misinformation is detected, THE System SHALL generate a "Truth Scorecard" automatically
 3. WHEN a Truth Scorecard is generated, the Publisher Agent SHALL make it visible on the public dashboard
 4. WHEN the System takes an action (scanning, verifying, publishing), THE System SHALL log this "Agentic Action" for transparency
 

@@ -165,34 +165,34 @@
 
 ## Feature 4: Submission Portal (High Priority)
 
-- [ ] 15. Frontend - Build Submission Portal UI
-- [ ] 15.1 Create submission form component
+- [x] 15. Frontend - Build Submission Portal UI
+- [x] 15.1 Create submission form component
   - Create text input with validation
   - Add submit button with loading state
   - Implement animated scanning indicator with matrix-style effects
   - _Requirements: 3.5, 7.1_
 
-- [ ] 15.2 Build truth scorecard display
+- [x] 15.2 Build truth scorecard display
   - Display match percentage
   - Show related known misinformation posts
   - Display risk level indicator (LOW/MEDIUM/HIGH)
   - Add smooth transition animations
   - _Requirements: 3.4_
 
-- [ ] 16. Backend - Implement Analysis Service
-  - Implement find_similar_posts using fuzzy matching with Levenshtein distance
-  - Add analyze_new_content method with Gemini API integration
-  - Implement generate_truth_scorecard method
-  - Add error handling for AI service unavailability (graceful degradation)
+- [x] 16. Backend - Implement Analysis Service
+  - [x] Implement find_similar_posts using fuzzy matching with Levenshtein distance
+  - [x] Add analyze_new_content method with Gemini API integration
+  - [x] Implement generate_truth_scorecard method
+  - [x] Add error handling for AI service unavailability (graceful degradation)
   - _Requirements: 3.1, 3.2, 3.3, 3.4, 6.5_
 
-- [ ] 17. Backend - Create analysis API endpoint
-  - Implement POST /api/analyze for content submission
-  - Return analysis results with match percentage and related posts
-  - Handle both matched and new content scenarios
+- [x] 17. Backend - Create analysis API endpoint
+  - [x] Implement POST /api/analyze for content submission
+  - [x] Return analysis results with match percentage and related posts
+  - [x] Handle both matched and new content scenarios
   - _Requirements: 3.1, 3.2, 3.3, 3.4, 8.3_
 
-- [ ] 18. Integration - Connect Submission Portal to Backend
+- [x] 18. Integration - Connect Submission Portal to Backend
   - Create API client function for analysis endpoint
   - Set up mutation hook for content submission
   - Connect form to backend analysis
@@ -200,7 +200,7 @@
   - Test end-to-end: submit content, view scanning animation, see results
   - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
 
-- [ ] 19. Checkpoint - Verify Submission Portal feature works end-to-end
+- [x] 19. Checkpoint - Verify Submission Portal feature works end-to-end
   - Test submitting known content (should match existing posts)
   - Test submitting new content (should trigger AI analysis)
   - Verify graceful degradation when AI is unavailable

@@ -5,6 +5,7 @@ import { FeedLayout } from './components/FeedLayout';
 import { useIncidents } from './hooks/useIncidents';
 import { useIncidentSocket } from './hooks/useIncidentSocket';
 import { TreeVisualization } from './components/tree/TreeVisualization';
+import { SubmissionPortal } from './components/SubmissionPortal';
 
 function Dashboard() {
   const [selectedIncidentId, setSelectedIncidentId] = useState<string | null>(null);
@@ -43,6 +44,10 @@ function Dashboard() {
               <TreeVisualization posts={posts} isLoading={isTreeLoading} />
             </div>
           )}
+
+          <div className="border-t border-slate-800 pt-8">
+            <SubmissionPortal />
+          </div>
         </main>
       </div>
     </div>
