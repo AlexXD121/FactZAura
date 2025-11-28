@@ -1,5 +1,7 @@
 from prisma import Prisma
 from services.connection_manager import manager
+from typing import Dict, Any, List, Optional
+from Levenshtein import ratio
 
 class PostService:
     def __init__(self):
@@ -104,3 +106,82 @@ class PostService:
                 result["diff"] = matcher.get_opcodes()
         
         return result
+
+    async def vote_on_post(self, post_id: str, is_credible: bool) -> Optional[dict]:
+        """
+        Vote on a post's credibility.
+        Updates credibleVotes and totalVotes.
+        """
+        await self.connect()
+        
+        post = await self.db.post.find_unique(where={"id": post_id})
+        if not post:
+            return None
+        
+        # Update vote counts
+        new_credible_votes = post.credibleVotes + (1 if is_credible else 0)
+        new_total_votes = post.totalVotes + 1
+        
+        updated_post = await self.db.post.update(
+            where={"id": post_id},
+            data={
+                "credibleVotes": new_credible_votes,
+                "totalVotes": new_total_votes
+            }
+        )
+        
+        # Broadcast update via WebSocket
+        await manager.broadcast(
+            {
+                "type": "post_voted",
+                "payload": updated_post.dict()
+            },
+            updated_post.incidentId
+        )
+        
+        return updated_post
+
+    async def get_comments(self, post_id: str) -> List[dict]:
+        """
+        Get all comments for a post.
+        """
+        await self.connect()
+        
+        comments = await self.db.comment.find_many(
+            where={"postId": post_id},
+            order={"createdAt": "desc"}
+        )
+        
+        return comments
+
+    async def create_comment(self, post_id: str, data: Dict[str, Any]) -> dict:
+        """
+        Create a new comment on a post.
+        """
+        await self.connect()
+        
+        comment = await self.db.comment.create(
+            data={
+                "postId": post_id,
+                "author": data["author"],
+                "content": data["content"]
+            }
+        )
+        
+        # Get the post to find incident ID for broadcasting
+        post = await self.db.post.find_unique(where={"id": post_id})
+        
+        # Broadcast update via WebSocket
+        if post:
+            await manager.broadcast(
+                {
+                    "type": "new_comment",
+                    "payload": {
+                        "comment": comment.dict(),
+                        "postId": post_id
+                    }
+                },
+                post.incidentId
+            )
+        
+        return comment

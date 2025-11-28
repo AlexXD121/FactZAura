@@ -22,7 +22,10 @@ export function FeedLayout({ incidents, onIncidentSelect, selectedId, isLoading 
     if (isLoading) {
         return (
             <div className="flex items-center justify-center h-full min-h-[400px]">
-                <Loader2 className="w-8 h-8 animate-spin text-slate-400" />
+                <div className="relative">
+                    <Loader2 className="w-8 h-8 animate-spin text-emerald-400" />
+                    <div className="absolute inset-0 w-8 h-8 rounded-full bg-emerald-400/20 animate-ping" />
+                </div>
             </div>
         );
     }
@@ -30,8 +33,10 @@ export function FeedLayout({ incidents, onIncidentSelect, selectedId, isLoading 
     return (
         <div className="space-y-6 p-6">
             <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-slate-100">Crisis Monitor</h2>
-                <div className="text-sm text-slate-400">
+                <h2 className="text-2xl font-bold text-slate-100 bg-gradient-to-r from-slate-100 to-slate-400 bg-clip-text text-transparent">
+                    Crisis Monitor
+                </h2>
+                <div className="text-sm text-slate-400 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700">
                     {incidents.length} Active Incidents
                 </div>
             </div>
@@ -40,17 +45,23 @@ export function FeedLayout({ incidents, onIncidentSelect, selectedId, isLoading 
                 {/* Incident Feed - Takes up 2 columns on large screens */}
                 <div className="lg:col-span-2 space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {sortedIncidents.map((incident) => (
-                            <IncidentCard
+                        {sortedIncidents.map((incident, index) => (
+                            <div
                                 key={incident.id}
-                                incident={incident}
-                                onSelect={onIncidentSelect}
-                                isSelected={selectedId === incident.id}
-                            />
+                                style={{
+                                    animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`
+                                }}
+                            >
+                                <IncidentCard
+                                    incident={incident}
+                                    onSelect={onIncidentSelect}
+                                    isSelected={selectedId === incident.id}
+                                />
+                            </div>
                         ))}
                     </div>
                     {incidents.length === 0 && (
-                        <div className="text-center py-12 text-slate-500 glass-panel">
+                        <div className="text-center py-12 text-slate-500 glass-panel animate-in fade-in duration-500">
                             No active incidents found.
                         </div>
                     )}
@@ -58,7 +69,7 @@ export function FeedLayout({ incidents, onIncidentSelect, selectedId, isLoading 
 
                 {/* Sidebar - Agent Activity Log */}
                 <div className="lg:col-span-1">
-                    <div className="sticky top-6">
+                    <div className="sticky top-6 animate-in slide-in-from-right duration-700">
                         <AgentLog />
                     </div>
                 </div>
